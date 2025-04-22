@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./dockerize_node_application
+    container_name: node
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./dockerize_node_application:/app
+      - /app/node_modules
+    networks:
+      - shakil_network
+    depends_on:
+      - frontend
+      # - Database
+
+  frontend:
+    build: ./dockerize_react_application
+    container_name: react
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./dockerize_react_application:/app
+      - /app/node_modules
+    networks:
+      - shakil_network
+
+
+
+  networks:
+    shakil_network:
+      driver: bridge
+     
+  # Database:
+  #   build: ./dockerize_react_application
+  #   container_name: mongo
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - ./dockerize_react_application:/app
+  #     - /app/node_modules
+
+  # frontend-1:
+  #   build: ./dockerize_react_application
+  #   container_name: react-1
+  #   ports:
+  #     - "5174:5173"
+  #   volumes:
+  #     - ./dockerize_react_application:/app
+  #     - /app/node_modules
