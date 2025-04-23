@@ -1,5 +1,6 @@
 version: '3.8'
-
+#added version 3.8 to avoid deprecated warnings
+#added version 3.8 to avoid deprecated warnings
 services:
   backend:
     build: ./dockerize_node_application
